@@ -1,3 +1,4 @@
+{-# LANGUAGE DeriveGeneric #-}
 
 module Blockchain.SHA (
   SHA(..),
@@ -20,7 +21,9 @@ import Blockchain.Data.RLP
 import Blockchain.ExtWord
 import Blockchain.Util
 
-newtype SHA = SHA Word256 deriving (Show, Eq)
+import GHC.Generics
+
+newtype SHA = SHA Word256 deriving (Show, Eq, Read, Generic)
 
 instance Pretty SHA where
   pretty (SHA x) = yellow $ text $ padZeros 64 $ showHex x ""
