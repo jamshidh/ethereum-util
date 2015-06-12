@@ -1,26 +1,31 @@
 
-module Blockchain.Util (
-  byteString2Integer,
-  bytes2Integer,
-  integer2Bytes,
-  integer2Bytes1,
-  word160ToBytes,
-  padZeros,
-  tab,
-  showMem,
-  safeDrop,
-  safeTake
-  ) where
+module Blockchain.Util where
 
 import Data.Bits
 import qualified Data.ByteString as B
+import qualified Data.NibbleString as N
 import Data.ByteString.Internal
 import Data.Functor
+import Data.Char
 import Data.List
 import Data.Word
 import Numeric
 
 import Blockchain.ExtWord
+
+showHex4::Word256->String
+showHex4 i = replicate (4 - length rawOutput) '0' ++ rawOutput
+    where rawOutput = showHex i ""
+
+showHexU::Integer->[Char]
+showHexU = map toUpper . flip showHex ""
+
+nibbleString2ByteString::N.NibbleString->B.ByteString
+nibbleString2ByteString (N.EvenNibbleString s) = s
+nibbleString2ByteString (N.OddNibbleString c s) = c `B.cons` s
+
+byteString2NibbleString::B.ByteString->N.NibbleString/
+byteString2NibbleString = N.EvenNibbleString
 
 --I hate this, it is an ugly way to create an Integer from its component bytes.
 --There should be an easier way....
