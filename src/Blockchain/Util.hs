@@ -24,7 +24,7 @@ nibbleString2ByteString::N.NibbleString->B.ByteString
 nibbleString2ByteString (N.EvenNibbleString s) = s
 nibbleString2ByteString (N.OddNibbleString c s) = c `B.cons` s
 
-byteString2NibbleString::B.ByteString->N.NibbleString/
+byteString2NibbleString::B.ByteString->N.NibbleString
 byteString2NibbleString = N.EvenNibbleString
 
 --I hate this, it is an ugly way to create an Integer from its component bytes.
