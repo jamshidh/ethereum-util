@@ -46,10 +46,6 @@ integer2Bytes1::Integer->[Word8]
 integer2Bytes1 0 = [0]
 integer2Bytes1 x = integer2Bytes x
 
-word160ToBytes::Word160->[Word8]
-word160ToBytes x =
-     map (\byte -> fromIntegral $ (x `shiftR` (byte*8)) .&. 0xFF) [19,18..0]
-
 padZeros::Int->String->String
 padZeros n s = replicate (n - length s) '0' ++ s
 
