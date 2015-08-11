@@ -17,16 +17,18 @@ import qualified Data.ByteString.Lazy.Char8 as BLC
 import Numeric
 import Text.PrettyPrint.ANSI.Leijen hiding ((<$>))
 
+import qualified Blockchain.Colors as CL
 import Blockchain.Data.RLP
 import Blockchain.ExtWord
+import Blockchain.Format
 import Blockchain.Util
 
 import GHC.Generics
 
 newtype SHA = SHA Word256 deriving (Show, Eq, Read, Generic)
 
-instance Pretty SHA where
-  pretty (SHA x) = yellow $ text $ padZeros 64 $ showHex x ""
+instance Format SHA where
+  format (SHA x) = CL.yellow $ padZeros 64 $ showHex x ""
 
 instance Binary SHA where
   put (SHA x) = sequence_ $ fmap put $ word256ToBytes $ fromIntegral x
