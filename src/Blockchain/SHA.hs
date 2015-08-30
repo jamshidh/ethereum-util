@@ -3,8 +3,6 @@
 module Blockchain.SHA (
   SHA(..),
   hash
-  --rlp2Word512,
-  --word5122RLP
   ) where
 
 import Control.Monad
@@ -15,7 +13,6 @@ import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 import qualified Data.ByteString.Lazy.Char8 as BLC
 import Numeric
-import Text.PrettyPrint.ANSI.Leijen hiding ((<$>))
 
 import qualified Blockchain.Colors as CL
 import Blockchain.Data.RLP
@@ -46,13 +43,4 @@ instance RLPSerializable SHA where
 
 hash::BC.ByteString->SHA
 hash = SHA . fromIntegral . byteString2Integer . C.hash 256
-
---------------------- Word512 stuff
-
-rlp2Word512::RLPObject->Word512
-rlp2Word512 (RLPString s) | length s == 64 = decode $ BLC.pack s
-rlp2Word512 x = error ("Missing case in rlp2Word512: " ++ show x)
-
-word5122RLP::Word512->RLPObject
-word5122RLP val = RLPString $ BLC.unpack $ encode val
 

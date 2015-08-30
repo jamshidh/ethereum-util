@@ -19,7 +19,6 @@ module Blockchain.ExtWord (
 import Data.Binary
 import Data.Bits
 import qualified Data.ByteString.Lazy.Char8 as BLC
-import Data.Word
 import Network.Haskoin.Internals (Word128, Word160, Word256, Word512)
 
 import Data.Ix
